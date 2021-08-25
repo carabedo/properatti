@@ -59,11 +59,7 @@ create_config.sh
 
 * Un archivo con la version de python que vamos a usar: [runtime.txt](runtime.txt)
 
-* Archivos de configuracion:
-
- [Procfile](Procfile)
-
- [create_config.sh](create_config.sh)
+* Archivos de configuracion:  [Procfile](Procfile) y  [create_config.sh](create_config.sh)
 
 ---
 
