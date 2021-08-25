@@ -70,7 +70,7 @@ create_config.sh
 
 [create_config.sh](create_config.sh)
 
---
+---
 
 Esta app esta funcionando en:
 
