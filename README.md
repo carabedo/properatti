@@ -46,13 +46,22 @@ Ejemplo del contenido de estos archivos esta este repositorio:
 https://github.com/carabedo/properatti
 
 ```bash
-st3.py
+app.py
 requirements.txt
 runtime.txt
 Procfile
 create_config.sh
 ``` 
-[a relative link](st3.py)
+
+El archivo .py con la app de streamlit, la misma que probamos que funciona en nuestras compus:
+
+[app.py](st3.py)
+
+Un archivo con las librerias que va usar nuestra app, es la lista de librerias que se necesitan instalar en la maquina virtual 
+para que todo ande bien
+
+[requirements.txt](requirements.txt)
+
 
 
 Esta app esta funcionando en:
