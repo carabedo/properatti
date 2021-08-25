@@ -1,1 +1,1 @@
-web: sh create_config.sh && streamlit run test.py
+web: sh create_config.sh && streamlit run st3.py
