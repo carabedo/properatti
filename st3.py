@@ -4,7 +4,8 @@ import streamlit.components.v1 as components
 import lightgbm as lgb
 from sklearn.model_selection import train_test_split
 import pandas as pd
-
+print(shap.__version__)
+shap.initjs()
 @st.cache()
 def explainer(model):
     explainer0 = shap.TreeExplainer(model)
@@ -30,7 +31,11 @@ def get_model(df):
 
 
 def st_shap(plot, height=None):
-    shap_html = f"<head>{shap.getjs()}</head><body>{plot.html()}</body>"
+    print(type(shap)
+    print(dir(shap))
+    js=shap.getjs()
+    
+    shap_html = f"<head>{js}</head><body>{plot.html()}</body>"
     components.html(shap_html, height=height)
 
 st.title("Tasador de propiedades")
