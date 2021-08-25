@@ -4,8 +4,9 @@ import streamlit.components.v1 as components
 import lightgbm as lgb
 from sklearn.model_selection import train_test_split
 import pandas as pd
-print(shap.__version__)
-shap.initjs()
+
+#funciones auxiliares:
+
 @st.cache()
 def explainer(model):
     explainer0 = shap.TreeExplainer(model)
@@ -34,35 +35,41 @@ def st_shap(plot, height=None):
     print(type(shap))
     print(dir(shap))
     js=shap.getjs()
-    
     shap_html = f"<head>{js}</head><body>{plot.html()}</body>"
     components.html(shap_html, height=height)
-
+    
+    
+    
+# aca empieza la 'pagina'
 st.title("Tasador de propiedades")
 
 
 
 
-#st.dataframe(df.drop('pricem2',axis=1).head()) 
 
 
 
-# train XGBoost model
+# levanto la data con la funcion que arme arriba
+
 df=get_data()
 
 
 
 
-
+# entreno el modelo
 model,X_test=get_model(df)
-# explain the model's predictions using SHAP
-# (same syntax works for LightGBM, CatBoost, scikit-learn and spark models)
+
 
 st.text('Visualizando el modelo para 500 predicciones:')
+
+# genero la expliacion para los datos del test
+
 explainer0,shap_values0=explainer(model)
+
+# ploteo resulados
 st_shap(shap.force_plot(explainer0.expected_value, shap_values0, X_test[:500]), 400)
 
-
+# formato del input
 
 tipo = st.selectbox(
      'Tipo de inmueble?',df.tipo.unique())
@@ -78,25 +85,23 @@ habs= st.slider('Cantidad de habitaciones?', df.habs.min(), df.habs.max(), 1.0)
 
 
 pred=[tipo,barrio,sup,0,habs]
+
+# voy a generar una fila con la prediccion del input, formateada con las dummis
+
 df2=df.reset_index(drop=True).copy()
-
 df2.loc[len(df2)] = pred
-
 df2=pd.get_dummies(df2,drop_first=True)
-
-
 pred=df2.drop('pricem2',axis=1).iloc[-1]
 
-
+# este es el xtest nuevo, de una sola predicion
 xtest=X_test[:500].reset_index(drop=True).append(pred)
 
+#genero la explicacion para esta prediccion
 explainer = shap.TreeExplainer(model)
-
 shap_values = explainer.shap_values(xtest)
 
-
+# printeamos el grafico
 st.text('Analizando la prediccion:')
-# visualize the first prediction's explanation (use matplotlib=True to avoid Javascript)
 st_shap(shap.force_plot(explainer.expected_value, shap_values[-1,:], xtest.iloc[-1,:]))
 
 
