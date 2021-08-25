@@ -67,9 +67,10 @@ create_config.sh
 * Archivos de configuracion:
 
 [Procfile](Procfile)
+
 [create_config.sh](create_config.sh)
 
----
+--
 
 Esta app esta funcionando en:
 
