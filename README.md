@@ -61,7 +61,13 @@ create_config.sh
 
 [requirements.txt](requirements.txt)
 
+* Un archivo con la version de python que vamos a usar:
+[runtime.txt](runtime.txt)
 
+* Archivos de configuracion:
+
+[Procfile](Procfile)
+[create_config.sh](create_config.sh)
 
 Esta app esta funcionando en:
 
