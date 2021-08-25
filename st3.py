@@ -60,7 +60,7 @@ df=get_data()
 model,X_test=get_model(df)
 
 
-st.text('Visualizando el modelo para 500 predicciones:')
+st.header('Visualizando el modelo para 500 predicciones:')
 
 # genero la expliacion para los datos del test
 
@@ -73,6 +73,8 @@ st_shap(shap.force_plot(explainer.expected_value, shap_values0, X_test[:500]), 4
 
 
 
+st.header('Elija las variables de la propiedad que quiere predecir:')
+
 tipo = st.selectbox(
      'Tipo de inmueble?',df.tipo.unique())
 
@@ -82,7 +84,7 @@ barrio= st.selectbox(
 sup = st.slider('Superficie del inmueble?', df.sup.min(), 400.0, 2.0)
 
 
-habs= st.slider('Cantidad de habitaciones?', df.habs.min(), df.habs.max(), 1.0)
+habs= st.slider('Cantidad de habitaciones?', df.habs.min(), 10.0, 1.0)
 
 
 
