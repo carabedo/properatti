@@ -53,22 +53,17 @@ Procfile
 create_config.sh
 ``` 
 
-* El archivo .py con la app de streamlit, la misma que probamos que funciona en nuestras compus:
+* El archivo .py con la app de streamlit, la misma que probamos que funciona en nuestras compus: [app.py](st3.py)
 
-[app.py](st3.py)
+* Un archivo con las librerias que va usar nuestra app, es la lista de librerias que se necesitan instalar en la maquina virtual para que todo ande bien [requirements.txt](requirements.txt)
 
-* Un archivo con las librerias que va usar nuestra app, es la lista de librerias que se necesitan instalar en la maquina virtual para que todo ande bien
-
-[requirements.txt](requirements.txt)
-
-* Un archivo con la version de python que vamos a usar:
-[runtime.txt](runtime.txt)
+* Un archivo con la version de python que vamos a usar: [runtime.txt](runtime.txt)
 
 * Archivos de configuracion:
 
-[Procfile](Procfile)
+ [Procfile](Procfile)
 
-[create_config.sh](create_config.sh)
+ [create_config.sh](create_config.sh)
 
 ---
 
