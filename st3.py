@@ -64,12 +64,14 @@ st.text('Visualizando el modelo para 500 predicciones:')
 
 # genero la expliacion para los datos del test
 
-explainer0,shap_values0=explainer(model)
+explainer,shap_values0=explainer(model)
 
 # ploteo resulados
-st_shap(shap.force_plot(explainer0.expected_value, shap_values0, X_test[:500]), 400)
+st_shap(shap.force_plot(explainer.expected_value, shap_values0, X_test[:500]), 400)
 
 # formato del input
+
+
 
 tipo = st.selectbox(
      'Tipo de inmueble?',df.tipo.unique())
@@ -93,16 +95,16 @@ df2.loc[len(df2)] = pred
 df2=pd.get_dummies(df2,drop_first=True)
 pred=df2.drop('pricem2',axis=1).iloc[-1]
 
-# este es el xtest nuevo, de una sola predicion
-xtest=X_test[:500].reset_index(drop=True).append(pred)
+#crotada para generar df apartir de una row
 
-#genero la explicacion para esta prediccion
-explainer = shap.TreeExplainer(model)
-shap_values = explainer.shap_values(xtest)
+xpred=pd.DataFrame(columns=list(pred.index))
+xpred.loc[0]=pred
+
+# generamos la explicacion para la propiedad input
+shap_value = explainer.shap_values(xpred)
 
 # printeamos el grafico
-st.text('Analizando la prediccion:')
-st_shap(shap.force_plot(explainer.expected_value, shap_values[-1,:], xtest.iloc[-1,:]))
-
+st.subheader('Analizando la prediccion:')
+st_shap(shap.force_plot(explainer.expected_value, shap_value, xpred))
 
 
