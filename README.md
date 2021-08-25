@@ -1,3 +1,4 @@
 # properatti
 
-Ejemplo de app de streamlit para ser deployada en heroku.
+
+Ejemplo de puesta en produccion de un modelo, usando streamlit para la interaccion del usuario y heroku para la virtualizacion del kernel de python. 
