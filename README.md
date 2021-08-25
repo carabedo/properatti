@@ -46,7 +46,7 @@ Ejemplo del contenido de estos archivos esta este repositorio:
 https://github.com/carabedo/properatti
 
 ```bash
-app_st.py
+st3.py
 requirements.txt
 runtime.txt
 Procfile
