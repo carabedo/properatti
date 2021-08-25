@@ -69,6 +69,8 @@ create_config.sh
 [Procfile](Procfile)
 [create_config.sh](create_config.sh)
 
+---
+
 Esta app esta funcionando en:
 
 [properatti.herokuapp.com](https://properatti.herokuapp.com/)
