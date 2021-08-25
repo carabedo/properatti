@@ -31,7 +31,7 @@ def get_model(df):
 
 
 def st_shap(plot, height=None):
-    print(type(shap)
+    print(type(shap))
     print(dir(shap))
     js=shap.getjs()
     
