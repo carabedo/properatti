@@ -7,12 +7,6 @@ import pandas as pd
 
 #funciones auxiliares:
 
-@st.cache()
-def explainer(model):
-    explainer0 = shap.TreeExplainer(model)
-
-    shap_values0= explainer0.shap_values(X_test[:500])
-    return(explainer0,shap_values0)
 
 
 @st.cache
@@ -29,8 +23,13 @@ def get_model(df):
     model=gbm.fit(X_train, y_train)
     return(model,X_test)
 
+@st.cache()
+def explainer(model):
+    explainer0 = shap.TreeExplainer(model)
+    shap_values0= explainer0.shap_values(X_test[:500])
+    return(explainer0,shap_values0)
 
-
+# funcion que me permite integrar un grafico de shap con streamlit
 def st_shap(plot, height=None):
     print(type(shap))
     print(dir(shap))
@@ -43,34 +42,11 @@ def st_shap(plot, height=None):
 # aca empieza la 'pagina'
 st.title("Tasador de propiedades")
 
-
-
-
-
-
-
 # levanto la data con la funcion que arme arriba
 
 df=get_data()
-
-
-
-
 # entreno el modelo
 model,X_test=get_model(df)
-
-
-st.header('Visualizando el modelo para 500 predicciones:')
-
-# genero la expliacion para los datos del test
-
-explainer,shap_values0=explainer(model)
-
-# ploteo resulados
-st_shap(shap.force_plot(explainer.expected_value, shap_values0, X_test[:500]), 400)
-
-# formato del input
-
 
 
 st.header('Elija las variables de la propiedad que quiere predecir:')
@@ -84,7 +60,7 @@ barrio= st.selectbox(
 sup = st.slider('Superficie del inmueble?', df.sup.min(), 400.0, 2.0)
 
 
-habs= st.slider('Cantidad de habitaciones?', df.habs.min(), 10.0, 1.0)
+habs= st.slider('Cantidad de habitaciones?', int(df.habs.min()), 10, 1)
 
 
 
@@ -102,6 +78,11 @@ pred=df2.drop('pricem2',axis=1).iloc[-1]
 xpred=pd.DataFrame(columns=list(pred.index))
 xpred.loc[0]=pred
 
+
+# genero la expliacion para los datos del test
+
+explainer,shap_values0=explainer(model)
+
 # generamos la explicacion para la propiedad input
 shap_value = explainer.shap_values(xpred)
 
@@ -110,3 +91,10 @@ st.subheader('Analizando la prediccion:')
 st_shap(shap.force_plot(explainer.expected_value, shap_value, xpred))
 
 
+
+st.header('Visualizando el modelo para 500 predicciones:')
+
+
+
+# ploteo resulados
+st_shap(shap.force_plot(explainer.expected_value, shap_values0, X_test[:500]), 400)
