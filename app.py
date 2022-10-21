@@ -90,11 +90,3 @@ shap_value = explainer.shap_values(xpred)
 st.subheader('Analizando la prediccion:')
 st_shap(shap.force_plot(explainer.expected_value, shap_value, xpred))
 
-
-
-st.header('Visualizando el modelo para 500 predicciones:')
-
-
-
-# ploteo resulados
-st_shap(shap.force_plot(explainer.expected_value, shap_values0, X_test[:500]), 400)
